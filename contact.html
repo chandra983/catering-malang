@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungi Kami - Catering Malang</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- COPY DARI INDEX (BASE STYLES) --- */
+        :root {
+            --primary-red: #b93c2e; 
+            --primary-green: #5d7448;
+            --ribbon-green: #6b7e55;
+            --ribbon-shadow: #4a583b;
+            --accent-orange: #e67e22; 
+            --bg-cream: #f9f7f2; 
+            --text-dark: #333333;
+            --font-script: 'Great Vibes', cursive;
+            --font-body: 'Poppins', sans-serif;
+            --paper-texture: url('https://www.transparenttextures.com/patterns/cream-paper.png');
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: var(--font-body); background-color: var(--bg-cream); background-image: var(--paper-texture); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+        
+        /* Navbar Utilities */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-primary { background-color: var(--primary-red); color: white; }
+        .btn-primary:hover { background-color: #962d22; }
+        
+        header { background-color: var(--bg-cream); padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { font-size: 2rem; color: var(--primary-red); }
+        .logo-text { font-family: var(--font-script); font-size: 1.8rem; color: var(--primary-red); line-height: 1; }
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #555; font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-red); }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* Footer Utilities */
+        footer { background-color: #fdfbf7; padding: 30px 0; border-top: 1px solid #ddd; margin-top: 50px;}
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .social-icons { display: flex; gap: 15px; }
+        .social-icons a { color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: 0.3s; }
+        .social-fb { background-color: #3b5998; } .social-ig { background-color: #e1306c; } .social-wa { background-color: #25d366; }
+
+        /* --- CONTACT PAGE SPECIFIC --- */
+
+        /* 1. Header Area */
+        .contact-header {
+            padding: 30px 0;
+            position: relative;
+            border-bottom: 2px dashed #d4af37; /* Garis putus-putus emas */
+            margin-bottom: 30px;
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-text h1 {
+            font-family: var(--font-script);
+            font-size: 4.5rem;
+            color: #5d2e2e;
+            line-height: 1;
+            margin-bottom: 5px;
+        }
+        
+        .header-text h1::after {
+            content: ' ,,';
+            color: #d4af37;
+            font-family: var(--font-body);
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: #444;
+            font-weight: 500;
+        }
+
+        /* Garis Swirl Dekoratif */
+        .header-decoration {
+            height: 20px;
+            width: 100px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q25 20 50 10 T100 10' stroke='%23d4af37' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            margin: 10px 0;
+        }
+
+        .header-image img {
+            max-width: 320px;
+            filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.2));
+        }
+
+        .intro-text {
+            text-align: left;
+            margin-bottom: 40px;
+            color: #555;
+            font-size: 1rem;
+            max-width: 900px;
+        }
+
+        /* 2. Main Grid Layout */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.8fr; /* Kiri lebih lebar */
+            gap: 40px;
+            position: relative;
+            padding-bottom: 80px; /* Space for spice image */
+        }
+
+        /* --- LEFT COLUMN --- */
+        
+        /* Ribbon Styles (Pita Hijau) */
+        .ribbon-container {
+            position: relative;
+            margin: 0 -10px 20px -10px; /* Keluar sedikit dari container */
+            z-index: 2;
+        }
+
+        .ribbon {
+            background-color: var(--ribbon-green); /* Hijau Pita */
+            color: #fffdd0; /* Cream text */
+            text-align: center;
+            padding: 10px 0;
+            font-weight: 700;
+            font-size: 1.2rem;
+            position: relative;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            /* Bentuk pita potong ujung */
+            clip-path: polygon(0 0, 100% 0, 97% 50%, 100% 100%, 0 100%, 3% 50%);
+        }
+
+        /* Efek lipatan di belakang (segitiga gelap) */
+        .ribbon-fold-left, .ribbon-fold-right {
+            position: absolute;
+            top: 100%;
+            width: 10px;
+            height: 10px;
+            background-color: var(--ribbon-shadow);
+            z-index: -1;
+        }
+        .ribbon-fold-left { left: 10px; clip-path: polygon(0 0, 100% 0, 100% 100%); }
+        .ribbon-fold-right { right: 10px; clip-path: polygon(0 0, 100% 0, 0 0); transform: scaleX(-1); }
+
+        /* Form Container */
+        .form-section {
+            background-color: transparent; /* Menyatu dengan kertas */
+            margin-bottom: 40px;
+            padding: 10px;
+            border: 1px dashed #ccc; /* Batas tipis seperti di foto */
+            border-radius: 8px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-label { display: block; margin-bottom: 5px; color: #555; font-weight: 600; font-size: 0.9rem; }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+            background-color: #fcfcfc;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); /* Efek kedalaman */
+            font-family: inherit;
+        }
+        
+        .form-textarea { resize: vertical; height: 120px; }
+
+        .btn-submit {
+            background: linear-gradient(to bottom, #d35400, #a04000); /* Gradasi Orange-Merah */
+            color: white;
+            border: none;
+            padding: 12px 0;
+            width: 150px;
+            margin: 0 auto;
+            display: block;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 0 #7e3200, 0 5px 10px rgba(0,0,0,0.3); /* Efek tombol 3D tebal */
+            cursor: pointer;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+            transition: transform 0.1s;
+        }
+        
+        .btn-submit:active {
+            transform: translateY(4px);
+            box-shadow: 0 0 0 #7e3200;
+        }
+
+        /* List Artikel (Di bawah label "Lokasi Kami" sesuai foto) */
+        .article-list {
+            margin-top: 10px;
+        }
+        
+        .article-item {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            border-bottom: 1px dashed #ccc;
+            padding: 15px 0;
+        }
+        
+        .article-thumb {
+            width: 100px;
+            height: 75px;
+            border-radius: 4px;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .article-info h4 {
+            font-size: 1rem;
+            color: #4a3b32;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+        
+        .read-more-link {
+            font-size: 0.8rem;
+            color: #b93c2e;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .btn-other-articles {
+            background: linear-gradient(to bottom, #d35400, #a04000);
+            color: white;
+            text-align: center;
+            padding: 8px 20px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 3px 0 #7e3200;
+        }
+
+        /* --- RIGHT COLUMN (Contact Info) --- */
+        .contact-info-card {
+            background-color: #fcf3e8; /* Warna cream agak pink/krem beda dikit */
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #ebebeb;
+            height: fit-content;
+        }
+
+        .info-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #4a3b32;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .info-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .info-logo i { color: #b93c2e; font-size: 2rem; }
+        .info-logo-text { font-family: var(--font-script); font-size: 1.8rem; color: #b93c2e; }
+
+        .info-list { list-style: none; margin-bottom: 20px; }
+        .info-list li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: #555;
+            font-size: 0.95rem;
+        }
+        
+        .info-list i {
+            width: 25px;
+            height: 25px;
+            background: #6b7e55;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+        
+        .social-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .social-circle {
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Map Image Simulation */
+        .map-container {
+            width: 100%;
+            height: 250px;
+            background-color: #eee;
+            margin-top: 20px;
+            border: 5px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .map-pin {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -100%);
+            color: #b93c2e;
+            font-size: 2rem;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        /* Bottom Text Right */
+        .bottom-location {
+            margin-top: 20px;
+        }
+        .bottom-location h4 { color: #4a3b32; margin-bottom: 5px; }
+        .bottom-location p { color: #666; font-size: 0.9rem; }
+
+        /* Dekorasi Pojok Kanan Bawah */
+        .corner-spice {
+            position: absolute;
+            bottom: -30px;
+            right: -20px;
+            width: 250px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .corner-spice img { width: 100%; drop-shadow: -5px -5px 10px rgba(0,0,0,0.2); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .header-flex { flex-direction: column; text-align: center; }
+            .header-image { margin-top: 20px; }
+            .corner-spice { width: 150px; bottom: 0; }
+            .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: white; padding: 20px; box-shadow: 0 5px 5px rgba(0,0,0,0.1); }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-utensils logo-icon"></i>
+                <div class="logo-text">
+                    Catering<br>Malang
+                </div>
+            </div>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Tentang Kami</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="paket-catering.html">Paket</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" style="color: var(--primary-red);">Kontak</a></li>
+                <li><a href="contact.html" class="btn btn-primary" style="padding: 8px 20px;">Pesan Sekarang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="contact-header">
+            <div class="header-flex">
+                <div class="header-text">
+                    <h1>Hubungi Kami</h1>
+                    <div class="header-decoration"></div>
+                    <p class="header-subtitle">Pesan Catering untuk Acara Spesial Anda</p>
+                </div>
+                <div class="header-image">
+                    <img src="https://images.unsplash.com/photo-1590483259883-93d3967d020d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Rempah Catering">
+                </div>
+            </div>
+        </div>
+
+        <p class="intro-text">
+            Kami siap membantu Anda! Hubungi kami untuk informasi lebih lanjut atau untuk memesan catering untuk acara Anda. Tim kami siap memberikan pelayanan terbaik untuk Anda.
+        </p>
+
+        <div class="contact-grid">
+            
+            <div class="left-col">
+                
+                <div class="ribbon-container">
+                    <div class="ribbon">Kirimkan Pesan Anda</div>
+                    <div class="ribbon-fold-left"></div>
+                    <div class="ribbon-fold-right"></div>
+                </div>
+
+                <div class="form-section">
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Nama</label>
+                            <input type="text" class="form-input" placeholder="Email (Sepertinya placeholder di foto salah, harusnya Nama)">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">No. Telepon</label>
+                            <input type="tel" class="form-input" value="0812-3456-7890">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pesan Anda</label>
+                            <textarea class="form-textarea"></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Kirim</button>
+                    </form>
+                </div>
+
+                <div class="ribbon-container" style="margin-top: 40px;">
+                    <div class="ribbon">Lokasi Kami :</div>
+                    <div class="ribbon-fold-left"></div>
+                    <div class="ribbon-fold-right"></div>
+                </div>
+
+                <div class="article-list">
+                    <div class="article-item">
+                        <img src="https://images.unsplash.com/photo-1577308856961-8e9ec50d0c6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=60" class="article-thumb" alt="Tips">
+                        <div class="article-info">
+                            <h4>Tips Menyiapkan Catering Hemat dan Efisien</h4>
+                            <a href="#" class="read-more-link">Baca Selengkapnya ▶</a>
+                        </div>
+                    </div>
+                    
+                    <div class="article-item">
+                        <img src="https://images.unsplash.com/photo-1572656631137-7935297eff55?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=60" class="article-thumb" alt="Soto">
+                        <div class="article-info">
+                            <h4>Resep Soto Ayam Lezat ala Catering</h4>
+                            <a href="#" class="read-more-link">Baca Selengkapnya ▶</a>
+                        </div>
+                    </div>
+
+                    <div class="article-item">
+                        <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=60" class="article-thumb" alt="Porsi">
+                        <div class="article-info">
+                            <h4>Cara Menghitung Porsi Catering yang Tepat untuk Acara</h4>
+                            <a href="#" class="read-more-link">Baca Selengkapnya ▶</a>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-other-articles">Baca Artikel Lainnya</a>
+                </div>
+
+            </div>
+
+            <div class="right-col">
+                <div class="contact-info-card">
+                    <h3 class="info-header">Informasi Kontak</h3>
+                    
+                    <div class="info-logo">
+                        <i class="fas fa-utensils"></i>
+                        <div class="info-logo-text">Catering<br>Malang</div>
+                    </div>
+
+                    <ul class="info-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt" style="background: #4a583b;"></i> 
+                            Jl. Contoh Raya No. 123, Malang
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt" style="background: #b93c2e;"></i> 
+                            0812-3456-7890
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope" style="background: #e67e22;"></i> 
+                            info@cateringmalang.com
+                        </li>
+                        <li>
+                            <i class="fas fa-comment-dots" style="background: #5d7448;"></i> 
+                            Chat Sekarang
+                        </li>
+                    </ul>
+
+                    <div class="social-row">
+                        <a href="#" class="social-circle social-fb"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-circle social-ig"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-circle social-wa"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+
+                    <div class="map-container">
+                        <img src="https://i.ibb.co.com/8N0gXqK/map-placeholder.png" alt="Peta Lokasi" style="opacity: 0.8;">
+                        <div class="map-pin"><i class="fas fa-map-marker-alt"></i></div>
+                        <div style="position: absolute; bottom: 50px; left: 20px; color: #333; font-weight: 600; font-size: 0.9rem; text-shadow: 0 0 5px white;">
+                            UIN Malang
+                        </div>
+                        <div style="position: absolute; bottom: 20px; left: 40px; color: #333; font-size: 0.8rem; text-shadow: 0 0 5px white;">
+                            Jl. Contoh Raya No. 123, Malang
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bottom-location">
+                    <h4>Lokasi Kami :</h4>
+                    <p>Jl. Contoh Raya No. 123, Malang</p>
+                </div>
+            </div>
+
+            <div class="corner-spice">
+                <img src="https://png.pngtree.com/png-clipart/20230124/original/pngtree-fresh-spices-and-vegetables-transparent-png-image_8928739.png" alt="Spices">
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="copyright" style="color: #666; font-size: 0.9rem;">
+                &copy; 2024 Catering Malang. All Rights Reserved.
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-ig"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-wa"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281234567890" target="_blank" class="floating-wa" style="position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 1000; text-decoration: none;" title="Chat WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

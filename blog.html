@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Catering Malang - Tips & Resep</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- COPY DARI INDEX.HTML (JANGAN DIUBAH AGAR KONSISTEN) --- */
+        :root {
+            --primary-red: #b93c2e; 
+            --primary-green: #5d7448; 
+            --accent-orange: #e67e22; 
+            --btn-orange-gradient: linear-gradient(to bottom, #d35400, #a04000);
+            --bg-cream: #f9f7f2; 
+            --text-dark: #333333;
+            --font-script: 'Great Vibes', cursive;
+            --font-body: 'Poppins', sans-serif;
+            --paper-texture: url('https://www.transparenttextures.com/patterns/cream-paper.png'); /* Tekstur Kertas */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: var(--font-body); background-color: var(--bg-cream); background-image: var(--paper-texture); color: var(--text-dark); line-height: 1.6; overflow-x: hidden; }
+        
+        /* Navbar & Footer Utilities (Sama seperti Index) */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .btn { display: inline-block; padding: 10px 25px; border-radius: 5px; text-decoration: none; font-weight: 600; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-primary { background-color: var(--primary-red); color: white; }
+        .btn-primary:hover { background-color: #962d22; transform: translateY(-2px); }
+        header { background-color: var(--bg-cream); padding: 15px 0; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { font-size: 2rem; color: var(--primary-red); }
+        .logo-text { font-family: var(--font-script); font-size: 1.8rem; color: var(--primary-red); line-height: 1; }
+        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
+        .nav-links a { text-decoration: none; color: #555; font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary-red); }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; cursor: pointer; }
+        footer { background-color: #fdfbf7; padding: 30px 0; border-top: 1px solid #ddd; margin-top: 50px;}
+        .footer-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .copyright { color: #666; font-size: 0.9rem; }
+        .social-icons { display: flex; gap: 15px; }
+        .social-icons a { color: white; width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; text-decoration: none; transition: 0.3s; }
+        .social-fb { background-color: #3b5998; } .social-ig { background-color: #e1306c; } .social-wa { background-color: #25d366; }
+        .social-icons a:hover { transform: scale(1.1); }
+
+        /* --- BLOG SPECIFIC STYLES (SESUAI DESAIN GAMBAR) --- */
+        
+        /* 1. Blog Header Area */
+        .blog-header-section {
+            padding: 40px 0;
+            position: relative;
+            background-image: var(--paper-texture);
+            border-bottom: 2px dashed #d4af37;
+        }
+
+        .blog-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .blog-title-wrapper {
+            max-width: 60%;
+        }
+
+        .blog-title-wrapper h1 {
+            font-family: var(--font-script);
+            font-size: 5rem;
+            color: #5d2e2e; /* Coklat gelap kemerahan */
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .blog-title-wrapper h1::after {
+            content: ' ,,';
+            color: #d4af37;
+            font-family: var(--font-body);
+            letter-spacing: -2px;
+        }
+
+        .blog-subtitle {
+            font-size: 1.4rem;
+            color: #555;
+            font-weight: 400;
+        }
+        
+        /* Garis dekoratif di bawah judul */
+        .header-divider {
+            height: 15px;
+            width: 150px;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10 Q25 20 50 10 T100 10' stroke='%23d4af37' fill='none' stroke-width='2'/%3E%3C/svg%3E");
+            background-repeat: repeat-x;
+            margin-top: 10px;
+        }
+
+        /* Gambar rempah di header kanan */
+        .header-spice-img {
+            max-width: 350px;
+            position: relative;
+        }
+        
+        .header-spice-img img {
+            width: 100%;
+            drop-shadow: 5px 10px 10px rgba(0,0,0,0.2);
+        }
+
+        /* 2. Featured Grid (3 Kolom Atas) */
+        .featured-section {
+            padding: 50px 0 30px 0;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 4px; /* Sudut agak tegas seperti kertas */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            background-image: var(--paper-texture);
+            border: 1px solid #eee;
+        }
+
+        /* Efek kertas sobek/shadow di bawah card */
+        .blog-card::after {
+            content: "";
+            position: absolute;
+            bottom: -5px;
+            left: 5%;
+            width: 90%;
+            height: 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 50%;
+            z-index: -1;
+            filter: blur(4px);
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .blog-card:hover .card-img-wrapper img {
+            transform: scale(1.1);
+        }
+
+        /* Tag Kategori (Overlay di gambar) */
+        .card-tag {
+            position: absolute;
+            bottom: 0;
+            left: 20px;
+            background-color: #c0583b; /* Warna bata/orange sesuai desain */
+            color: white;
+            padding: 5px 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border-radius: 4px 4px 0 0;
+            z-index: 2;
+        }
+        
+        .tag-green { background-color: #5d7448; } /* Hijau untuk variasi */
+
+        .card-body {
+            padding: 25px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            line-height: 1.3;
+            color: #333;
+        }
+
+        .card-date {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 15px;
+        }
+
+        .card-excerpt {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* Tombol Baca Selengkapnya - Style Tombol Bata Bergradasi */
+        .btn-read-more {
+            display: block;
+            background: linear-gradient(to bottom, #d65a31, #a33215);
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 5px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 3px 0 #80220a; /* Efek 3D tombol */
+            transition: transform 0.2s;
+        }
+
+        .btn-read-more:hover {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #80220a;
+        }
+
+        /* 3. Main Content Split (Artikel Terbaru & Sidebar) */
+        .content-split {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            padding-bottom: 60px;
+        }
+
+        /* -- Bagian Kiri: Artikel Terbaru -- */
+        
+        /* Ribbon Header Hijau */
+        .ribbon-header {
+            position: relative;
+            margin-bottom: 30px;
+            padding: 0 15px;
+        }
+        
+        .ribbon-title {
+            background-color: #6b7e55; /* Hijau pudar */
+            color: #fffdd0; /* Cream text */
+            display: inline-block;
+            padding: 10px 40px;
+            font-family: var(--font-body);
+            font-weight: 700;
+            font-size: 1.5rem;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 95% 50%, 100% 100%, 0 100%, 5% 50%);
+            /* Bentuk pita dengan ujung terpotong ke dalam */
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* List Artikel Horizontal */
+        .latest-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .latest-item {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border-bottom: 1px dashed #ccc;
+            padding-bottom: 20px;
+        }
+        
+        .latest-thumb {
+            width: 120px;
+            height: 90px;
+            border-radius: 5px;
+            object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .latest-info h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #444;
+        }
+
+        .link-arrow {
+            color: #a33215;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .link-arrow:hover { text-decoration: underline; }
+
+        /* -- Bagian Kanan: Sidebar -- */
+        .sidebar {
+            background-color: transparent;
+        }
+
+        .sidebar-widget {
+            margin-bottom: 40px;
+        }
+
+        .widget-title {
+            font-family: var(--font-body);
+            font-size: 1.5rem;
+            color: #8b5e3c; /* Coklat */
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 5px;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        /* Search Box */
+        .search-box {
+            position: relative;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 5px;
+            display: flex;
+        }
+
+        .search-box input {
+            border: none;
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .search-btn {
+            background-color: #5d7448;
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Categories List */
+        .cat-list {
+            list-style: none;
+        }
+
+        .cat-list li {
+            margin-bottom: 12px;
+            font-size: 1rem;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cat-list li i {
+            color: #8b5e3c; /* Warna centang */
+        }
+
+        /* Hubungi Kami Widget */
+        .contact-widget {
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        .contact-content-sidebar {
+            background: transparent;
+        }
+        
+        .contact-phone {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .contact-wa {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #25d366;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 15px;
+        }
+        
+        /* Dekorasi rempah di pojok kanan bawah sidebar */
+        .sidebar-spice {
+            position: absolute;
+            bottom: -50px;
+            right: -20px;
+            width: 150px;
+            z-index: -1;
+            opacity: 0.9;
+        }
+
+        /* Responsif */
+        @media (max-width: 768px) {
+            .blog-header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .blog-title-wrapper { max-width: 100%; margin-bottom: 20px; }
+            .header-spice-img { max-width: 80%; }
+            .content-split { grid-template-columns: 1fr; }
+            .sidebar { border-top: 2px dashed #ccc; padding-top: 40px; margin-top: 20px; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 5px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .mobile-menu-btn { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-utensils logo-icon"></i>
+                <div class="logo-text">
+                    Catering<br>Malang
+                </div>
+            </div>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">Tentang Kami</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="paket-catering.html">Paket</a></li>
+                <li><a href="blog.html" style="color: var(--primary-red);">Blog</a></li>
+                <li><a href="contact.html">Kontak</a></li>
+                <li><a href="contact.html" class="btn btn-primary" style="padding: 8px 20px;">Pesan Sekarang</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="blog-header-section">
+        <div class="container blog-header-content">
+            <div class="blog-title-wrapper">
+                <h1>Blog kami</h1>
+                <div class="header-divider"></div>
+                <p class="blog-subtitle">Tips, Resep, dan Info Menarik <br>Seputar Catering dan Kuliner</p>
+            </div>
+            <div class="header-spice-img">
+                <img src="https://images.unsplash.com/photo-1590483259883-93d3967d020d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Sambal dan Bumbu">
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        
+        <section class="featured-section">
+            <div class="featured-grid">
+                
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Catering Buffet">
+                        <span class="card-tag">Tips & Panduan</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Panduan Memilih Menu Catering untuk Berbagai Acara</h3>
+                        <div class="card-date">20 April 2024</div>
+                        <p class="card-excerpt">Menemukan menu catering yang tepat bisa menjadi tantangan. Simak tips memilih menu catering untuk berbagai acara di sini.</p>
+                        <a href="#" class="btn-read-more">Baca Selengkapnya</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Ayam Goreng">
+                        <span class="card-tag">Resep Catering</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">Resep Ayam Goreng Kremes Khas Catering</h3>
+                        <div class="card-date">15 April 2024</div>
+                        <p class="card-excerpt">Coba resep ayam goreng kremes ala catering yang gurih dan renyah. Mudah dibuat dengan bahan sederhana.</p>
+                        <a href="#" class="btn-read-more">Baca Selengkapnya</a>
+                    </div>
+                </article>
+
+                <article class="blog-card">
+                    <div class="card-img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" alt="Nasi Kotak Kantor">
+                        <span class="card-tag tag-green">Tips Catering</span>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">5 Keuntungan Menggunakan Jasa Catering untuk Acara Kantor</h3>
+                        <div class="card-date">10 April 2024</div>
+                        <p class="card-excerpt">Cari tahu berbagai keuntungan menggunakan jasa catering untuk acara kantor dan meeting di sini.</p>
+                        <a href="#" class="btn-read-more">Baca Selengkapnya</a>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <div class="content-split">
+            
+            <main>
+                <div class="ribbon-header">
+                    <div class="ribbon-title">Artikel Terbaru</div>
+                </div>
+
+                <div class="latest-list">
+                    <div class="latest-item">
+                        <img src="https://images.unsplash.com/photo-1577308856961-8e9ec50d0c6b?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=60" alt="Persiapan Catering" class="latest-thumb">
+                        <div class="latest-info">
+                            <h4>Tips Menyiapkan Catering Hemat dan Efisien</h4>
+                            <a href="#" class="link-arrow">Baca Selengkapnya ▶</a>
+                        </div>
+                    </div>
+
+                    <div class="latest-item">
+                        <img src="https://images.unsplash.com/photo-1572656631137-7935297eff55?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=60" alt="Soto Ayam" class="latest-thumb">
+                        <div class="latest-info">
+                            <h4>Resep Soto Ayam Lezat ala Catering</h4>
+                            <a href="#" class="link-arrow">Baca Selengkapnya ▶</a>
+                        </div>
+                    </div>
+
+                    <div class="latest-item">
+                        <img src="https://images.unsplash.com/photo-1541544741938-0af808871cc0?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=60" alt="Hitung Porsi" class="latest-thumb">
+                        <div class="latest-info">
+                            <h4>Cara Menghitung Porsi Catering yang Tepat untuk Acara</h4>
+                            <a href="#" class="link-arrow">Baca Selengkapnya ▶</a>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px;">
+                        <a href="#" class="btn-read-more" style="display: inline-block; padding: 10px 30px; font-size: 0.9rem;">Baca Artikel Lainnya</a>
+                    </div>
+                </div>
+            </main>
+
+            <aside class="sidebar">
+                
+                <div class="sidebar-widget">
+                    <h3 class="widget-title">Categories</h3>
+                    <div class="search-box">
+                        <input type="text" placeholder="Search">
+                        <button class="search-btn"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+
+                <div class="sidebar-widget">
+                    <ul class="cat-list">
+                        <li><i class="fas fa-check"></i> Tips & Panduan</li>
+                        <li><i class="fas fa-check"></i> Resep Catering</li>
+                        <li><i class="fas fa-check"></i> Tips Catering</li>
+                        <li><i class="fas fa-check"></i> Info Kuliner</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-widget contact-widget">
+                    <h3 class="widget-title">Hubungi Kami</h3>
+                    <div class="contact-content-sidebar">
+                        <p class="contact-phone">Telp : 0812-3456-7890</p>
+                        <a href="#" class="contact-wa">
+                            <i class="fab fa-whatsapp"></i> WhatsApp: Chat
+                        </a>
+                    </div>
+                    
+                    <img src="https://png.pngtree.com/png-clipart/20230124/original/pngtree-fresh-spices-and-vegetables-transparent-png-image_8928739.png" class="sidebar-spice" alt="Spices decoration">
+                </div>
+
+            </aside>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="copyright">
+                &copy; 2024 Catering Malang. All Rights Reserved.
+            </div>
+            <div class="social-icons">
+                <a href="#" class="social-fb"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="social-ig"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-wa"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6281234567890" target="_blank" class="floating-wa" style="position: fixed; bottom: 30px; right: 30px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 30px; box-shadow: 0 5px 15px rgba(0,0,0,0.3); z-index: 1000; text-decoration: none;" title="Chat WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
